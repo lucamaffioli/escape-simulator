@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Escape Simulator</title>
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/editor.css">
+</head>
+<body>
+    <header id="intestazione">
+        <h1>Escape Simulator</h1>
+        <p id="etichetta-utente">Ospite</p>
+        <button id="bottone-accedi" type="button" class="bottone bottone-blu">Accedi</button>
+        <button id="bottone-esci" type="button" class="bottone nascosto">Esci</button>
+    </header>
+
+    <div id="schermata-elenco" class="schermata">
+        <h2>Simulatore di evacuazione</h2>
+        <p class="introduzione">
+            Disegna la pianta di una stanza con muri, porte e persone, avvia l'evacuazione
+            e guarda quanto tempo serve per svuotarla. Cambiando la posizione di una porta o
+            di un ostacolo si vede subito come cambiano i tempi e dove si formano gli ingorghi.
+            Parti da una simulazione nuova oppure apri uno dei template qui sotto.
+        </p>
+        <p>
+            <a href="doc.html" class="bottone">Leggi il Manuale Utente</a>
+        </p>
+        <h3 id="titolo-progetti"></h3>
+        <div id="griglia-progetti" class="griglia-schede">
+            <button id="scheda-nuovo" type="button" class="scheda scheda-nuovo">
+                <span class="segno-piu">+</span>
+                Nuova simulazione
+            </button>
+        </div>
+
+        <h3>Template di esempio</h3>
+        <div id="griglia-esempi" class="griglia-schede"></div>
+    </div>
+
+    <div id="schermata-dimensioni" class="schermata nascosto">
+        <div class="riquadro">
+            <h2>Dimensioni dell'ambiente</h2>
+            <p>Indica quanto è grande la stanza da disegnare, in metri.</p>
+
+            <form id="modulo-dimensioni">
+                <p>
+                    <label for="campo-larghezza">Larghezza (da 4 a 40 metri)</label>
+                    <input type="number" id="campo-larghezza" min="4" max="40" step="1" value="10" required>
+                </p>
+                <p>
+                    <label for="campo-profondita">Profondità (da 4 a 40 metri)</label>
+                    <input type="number" id="campo-profondita" min="4" max="40" step="1" value="8" required>
+                </p>
+                <p class="nota">Ogni quadretto della griglia corrisponde a 40 x 40 centimetri.</p>
+                <p class="pulsanti">
+                    <button type="button" id="bottone-annulla-dimensioni" class="bottone">Indietro</button>
+                    <button type="submit" class="bottone bottone-verde">Crea la griglia</button>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <div id="schermata-accesso" class="schermata nascosto">
+        <div class="riquadro">
+            <h2>Accedi</h2>
+            <form id="modulo-accesso">
+                <p>
+                    <label for="accesso-nome">Nome utente</label>
+                    <input type="text" id="accesso-nome" required autocomplete="username">
+                </p>
+                <p>
+                    <label for="accesso-password">Password</label>
+                    <input type="password" id="accesso-password" required autocomplete="current-password">
+                </p>
+                <p class="pulsanti">
+                    <button type="button" class="bottone bottone-annulla">Indietro</button>
+                    <button type="submit" class="bottone bottone-blu">Accedi</button>
+                </p>
+            </form>
+            <p class="riga-collegamento">
+                Non hai un account? <a href="#" id="link-vai-a-registrazione">Registrati qui</a>
+            </p>
+        </div>
+    </div>
+
+    <div id="schermata-registrazione" class="schermata nascosto">
+        <div class="riquadro">
+            <h2>Registrati</h2>
+            <form id="modulo-registrazione">
+                <p>
+                    <label for="registrazione-nome">Nome utente (almeno 3 caratteri)</label>
+                    <input type="text" id="registrazione-nome" required autocomplete="username">
+                </p>
+                <p>
+                    <label for="registrazione-password">Password (almeno 4 caratteri)</label>
+                    <input type="password" id="registrazione-password" required autocomplete="new-password">
+                </p>
+                <p>
+                    <label for="registrazione-conferma">Ripeti la password</label>
+                    <input type="password" id="registrazione-conferma" required autocomplete="new-password">
+                </p>
+                <p class="pulsanti">
+                    <button type="button" class="bottone bottone-annulla">Indietro</button>
+                    <button type="submit" class="bottone bottone-verde">Crea account</button>
+                </p>
+            </form>
+            <p class="riga-collegamento">
+                Hai già un account? <a href="#" id="link-vai-a-accesso">Accedi qui</a>
+            </p>
+        </div>
+    </div>
+
+    <div id="schermata-editor" class="schermata nascosto">
+
+        <div class="colonna" id="colonna-strumenti">
+            <h3>Strumenti</h3>
+            <p class="gruppo-strumenti">
+                <button type="button" class="strumento attivo" data-strumento="muro">Muro</button>
+                <button type="button" class="strumento" data-strumento="uscita">Uscita</button>
+                <button type="button" class="strumento" data-strumento="persone">Persona</button>
+                <button type="button" class="strumento" data-strumento="gomma">Gomma</button>
+            </p>
+            <ul class="note-strumenti">
+                <li><strong>Trascina</strong> il mouse per disegnare più caselle.</li>
+                <li><strong>Tasto destro</strong> per cancellare, senza cambiare strumento.</li>
+                <li>Una casella occupata va <strong>prima cancellata</strong> per cambiarla.</li>
+                <li>Muri e persone solo <strong>dentro</strong> la stanza.</li>
+                <li>Uscite solo sul <strong>bordo esterno</strong>, angoli esclusi.</li>
+            </ul>
+            <p>
+                <button type="button" id="bottone-svuota" class="bottone bottone-rosso larghezza-piena"> Svuota la griglia </button>
+            </p>
+
+            <h3>Progetto</h3>
+            <p>
+                <label for="campo-nome-progetto">Nome</label>
+                <input type="text" id="campo-nome-progetto" value="Simulazione senza nome">
+            </p>
+            <p>
+                <button type="button" id="bottone-salva" class="bottone bottone-verde larghezza-piena">Salva</button>
+            </p>
+            <p>
+                <button type="button" id="bottone-chiudi-editor" class="bottone larghezza-piena">Torna all'elenco</button>
+            </p>
+        </div>
+
+        <div id="area-disegno">
+            <canvas id="tela"></canvas>
+        </div>
+
+        <div class="colonna">
+            <h3>Simulazione</h3>
+            <p class="pulsanti-riproduzione">
+                <button type="button" id="bottone-avvia" class="bottone bottone-verde">Avvia</button>
+                <button type="button" id="bottone-pausa" class="bottone bottone-giallo nascosto">Pausa</button>
+                <button type="button" id="bottone-azzera" class="bottone bottone-rosso" disabled>Azzera</button>
+            </p>
+            <p>
+                <span id="valore-ritardo" class="valore-cursore">3 s</span>
+                <label for="cursore-ritardo">Ritardo di reazione</label>
+                <input type="range" id="cursore-ritardo" min="0" max="10" step="1" value="3">
+                <span class="nota-cursore">
+                    Quanto tempo passa prima che una persona si accorga dell'allarme
+                    e si alzi. A zero partono tutte insieme.
+                </span>
+            </p>
+            <p>
+                <span id="valore-panico" class="valore-cursore">70%</span>
+                <label for="cursore-panico">Panico</label>
+                <input type="range" id="cursore-panico" min="0" max="90" step="10" value="70">
+                <span class="nota-cursore">
+                    Quanto le persone si ostacolano quando vogliono passare nello
+                    stesso punto. Alzandolo gli ingorghi alle porte peggiorano.
+                </span>
+            </p>
+            <p>
+                <span id="valore-velocita" class="valore-cursore">1x</span>
+                <label for="cursore-velocita">Velocità di riproduzione</label>
+                <input type="range" id="cursore-velocita" min="1" max="5" step="1" value="1">
+                <span class="nota-cursore">
+                    Serve solo a guardare la simulazione più in fretta: il tempo
+                    misurato non cambia.
+                </span>
+            </p>
+            <p>
+                <input type="checkbox" id="spunta-frecce">
+                <label for="spunta-frecce">Mostra campo di flusso</label>
+            </p>
+
+            <h3>Ambiente</h3>
+            <table id="tabella-dati">
+                <tr><th>Persone</th><td id="dato-totale">0</td></tr>
+                <tr><th>Uscite</th><td id="dato-uscite">0</td></tr>
+                <tr><th>Ostacoli</th><td id="dato-ostacoli">0</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <div id="finestra-messaggio" class="sfondo-finestra nascosto">
+        <div class="finestra finestra-stretta">
+            <p id="testo-messaggio"></p>
+            <p class="pulsanti">
+                <button type="button" id="bottone-messaggio-annulla" class="bottone nascosto">Annulla</button>
+                <button type="button" id="bottone-messaggio-ok" class="bottone bottone-blu">OK</button>
+            </p>
+        </div>
+    </div>
+
+    <script src="js/server.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/interface.js"></script>
+    <script src="js/projects.js"></script>
+    <script src="js/editor.js"></script>
+    <script src="js/simulation.js"></script>
+    <script src="js/render.js"></script>
+</body>
+</html>

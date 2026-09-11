@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Escape Simulator - Documentazione</title>
+<link rel="stylesheet" href="css/common.css">
+</head>
+<body>
+    <header id="intestazione">
+        <h1>Escape Simulator - Documentazione</h1>
+        <a href="index.html" class="bottone bottone-blu">Torna al Simulatore</a>
+    </header>
+
+    <div class="schermata">
+        <div class="testo-manuale riquadro riquadro-manuale">
+            <h2>Che cos'è Escape Simulator</h2>
+            <p>
+                Escape Simulator è un simulatore di evacuazione. Permette di stimare quanto tempo occorre
+                perché le persone presenti in un ambiente chiuso raggiungano un'uscita e di vedere
+                in quali punti il flusso rallenta.
+            </p>
+            <p>
+                Il tempo di uscita dipende dal numero di presenti e dalla larghezza delle porte,
+                ma anche dalla forma della stanza e dagli ostacoli presenti. Sono fattori che una piantina
+                non lascia intuire e che emergono soltanto guardando come si svuota l'ambiente.
+                Per questo lo strumento è pensato più per il confronto fra due versioni della stessa stanza
+                che per la misura di una sola.
+            </p>
+
+            <h3>Come si usa</h3>
+            <ol>
+                <li>Dalla schermata iniziale si sceglie <strong>Nuova simulazione</strong> per partire
+                    da una stanza vuota, oppure si apre uno dei template di esempio.</li>
+                <li>Per una stanza nuova si indicano larghezza e profondità in metri.
+                    Ogni quadretto della griglia corrisponde a 40 centimetri di lato.</li>
+                <li>Si sceglie uno strumento nella colonna di sinistra e si disegna tenendo premuto
+                    il tasto del mouse: <strong>Muro</strong> per pareti, banchi e ostacoli,
+                    <strong>Uscita</strong> per le porte, che si possono collocare solo sul bordo esterno,
+                    <strong>Persona</strong> per chi deve evacuare, <strong>Gomma</strong> per cancellare.
+                    Il tasto destro cancella senza cambiare strumento. Una casella già occupata
+                    non viene sovrascritta: per cambiarla occorre prima cancellarla, e questo permette
+                    di collocare le persone senza rovinare i muri già disegnati.</li>
+                <li>Il riquadro <strong>Ambiente</strong> a destra conta persone, porte e ostacoli presenti,
+                    contati come elementi e non come singole celle occupate.</li>
+                <li>Con almeno una persona e almeno un'uscita è possibile premere <strong>Avvia</strong>.
+                    La simulazione si può mettere in pausa e riprendere; durante l'esecuzione il disegno
+                    resta bloccato, e per modificarlo occorre prima azzerare.</li>
+                <li>Al termine compare un riepilogo con il tempo di evacuazione totale e medio per persona.</li>
+            </ol>
+
+            <h3>Parametri simulazione</h3>
+            <p>Tramite i cursori è possibile influenzare alcuni comportamenti della folla:</p>
+            <ul>
+                <li><em>Ritardo di reazione</em>: le persone reagiscono al pericolo con tempistiche
+                    differenti, e questo parametro ne definisce il ritardo massimo.</li>
+                <li><em>Panico</em>: regola quanto le persone si ostacolano quando vogliono passare
+                    nello stesso punto. Alzandolo si formano ingorghi più marcati nelle strettoie
+                    e davanti alle uscite.</li>
+                <li><em>Velocità di riproduzione</em>: non incide sul risultato, serve solo a guardare
+                    l'evacuazione più in fretta.</li>
+                <li><em>Mostra campo di flusso</em>: rende visibile, per mezzo di frecce, il percorso
+                    che le persone seguono per raggiungere l'uscita più vicina.</li>
+            </ul>
+
+            <h3>Account di prova</h3>
+            <p>
+                Un ospite può disegnare, avviare simulazioni e aprire le mappe di esempio,
+                ma non può salvare progetti. Sono già presenti due account.
+            </p>
+            <ul>
+                <li><strong>user</strong> con password <strong>user</strong>: utente semplice.
+                    Crea, modifica ed elimina i propri progetti; delle mappe di esempio può salvare
+                    soltanto una copia propria.</li>
+                <li><strong>admin</strong> con password <strong>admin</strong>: amministratore.
+                    I suoi progetti diventano mappe di esempio visibili a tutti.</li>
+            </ul>
+
+            <h3>Funzionamento</h3>
+            <p>
+                L'ambiente viene rappresentato come una griglia di quadretti da 40 centimetri di lato,
+                ciascuno dei quali può essere occupato da una persona sola. La simulazione avanza per passi
+                successivi, e a ogni passo tutte le persone si spostano contemporaneamente di una cella.
+                La durata di un passo, 0,3 secondi, non è stata scelta arbitrariamente: è il tempo necessario
+                a percorrere 40 centimetri alla velocità di 1,33 metri al secondo, che è il valore medio
+                rilevato su pedoni reali.
+            </p>
+            <p>
+                Il percorso non viene ricalcolato per ogni persona. Non appena l'ambiente è definito, viene
+                determinata una sola volta, per ciascun quadretto della stanza, la distanza che lo separa
+                dall'uscita più vicina; è questa informazione che le frecce rendono visibile. A ogni passo
+                ciascuna persona viene spostata sul quadretto libero fra quelli adiacenti che presenta
+                la distanza minore.
+            </p>
+            <p>
+                Quando due o più persone richiedono lo stesso quadretto si ostacolano a vicenda: in base
+                al valore del panico può passarne una sola oppure nessuna. È questo meccanismo, più della
+                velocità di cammino, a determinare i tempi negli ambienti affollati.
+            </p>
+            <p>
+                Il modello adotta alcune semplificazioni: tutte le persone camminano alla stessa andatura
+                e conoscono già il percorso più breve, non si formano gruppi e non sono rappresentati fumo,
+                incendio o vie d'uscita che si bloccano. I tempi ottenuti vanno pertanto interpretati come
+                termine di paragone fra planimetrie alternative, e non come previsione di quanto durerebbe
+                un'evacuazione reale.
+            </p>
+
+            <h3>Riferimenti</h3>
+            <ul class="riferimenti">
+                <li>Burstedde, Klauck, Schadschneider, Zittartz (2001), <em>Simulation of pedestrian
+                    dynamics using a two-dimensional cellular automaton</em>, Physica A 295 &mdash;
+                    struttura del modello a griglia, qui semplificata con scelta deterministica
+                    della direzione.</li>
+                <li>Weidmann (1993), <em>Transporttechnik der Fussgänger</em>, Schriftenreihe des IVT
+                    Nr. 90, ETH Zürich &mdash; velocità media di cammino, da cui deriva la durata
+                    del passo.</li>
+                <li>Kirchner, Nishinari, Schadschneider (2003), <em>Friction effects and clogging in a
+                    cellular automaton model for pedestrian dynamics</em>, Physical Review E 67
+                    &mdash; attrito che fa formare l'ingorgo davanti alle uscite.</li>
+                <li>Kirchner, Klüpfel, Nishinari, Schadschneider, Schreckenberg (2003), <em>Simulation
+                    of competitive egress behavior: comparison with aircraft evacuation data</em>,
+                    Physica A 324 &mdash; attrito come misura del comportamento competitivo, da cui
+                    il cursore <em>Panico</em>.</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

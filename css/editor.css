@@ -1,0 +1,129 @@
+/* Stile schermata editor. */
+
+#schermata-editor {
+    display: grid;
+    grid-template-columns: 245px 1fr 245px;
+    padding: 0;
+    overflow: hidden;
+}
+
+.colonna {
+    background-color: #ffffff;
+    border-left: 1px solid #cccccc;
+    border-right: 1px solid #cccccc;
+    padding: 16px;
+    overflow-y: auto;
+}
+
+.colonna h3 {
+    border-bottom: 1px solid #dddddd;
+    padding-bottom: 5px;
+    margin-top: 0;
+}
+
+.colonna h3 + h3,
+.colonna p + h3 { margin-top: 20px; }
+
+.colonna p { margin-bottom: 10px; }
+
+.gruppo-strumenti {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.strumento {
+    font-family: inherit;
+    font-size: 0.875rem;
+    text-align: left;
+    padding: 8px 12px;
+    border: 1px solid #b0b0b0;
+    border-radius: 3px;
+    background-color: #ffffff;
+    color: #222222;
+    cursor: pointer;
+}
+
+.strumento:hover { background-color: #e8e8e8; }
+
+.strumento:disabled { opacity: 0.45; pointer-events: none; }
+
+.strumento.attivo {
+    background-color: #1565c0;
+    border-color: #1565c0;
+    color: #ffffff;
+}
+
+.pulsanti-riproduzione {
+    display: flex;
+    gap: 6px;
+}
+
+.pulsanti-riproduzione .bottone { flex: 1; }
+
+.valore-cursore {
+    float: right;
+    font-weight: bold;
+    color: #1565c0;
+}
+
+#tabella-dati {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+}
+
+#tabella-dati th,
+#tabella-dati td {
+    border-bottom: 1px solid #eeeeee;
+    padding: 6px 2px;
+}
+
+#tabella-dati th {
+    text-align: left;
+    font-weight: normal;
+    color: #555555;
+}
+
+#tabella-dati td {
+    text-align: right;
+    font-weight: bold;
+}
+
+#area-disegno {
+    background-color: #e4e6ea;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    overflow: hidden;
+}
+
+#tela {
+    background-color: #ffffff;
+    border: 1px solid #999999;
+    cursor: crosshair;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#tela.bloccata { cursor: not-allowed; }
+
+.note-strumenti {
+    font-size: 0.8125rem;
+    color: #666666;
+    margin: 8px 0 12px 0;
+    padding-left: 18px;
+}
+
+.note-strumenti li {
+    margin-bottom: 5px;
+}
+
+.nota-cursore {
+    display: block;
+    font-size: 0.75rem;
+    color: #777777;
+    line-height: 1.35;
+    margin-top: 3px;
+}

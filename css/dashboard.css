@@ -1,0 +1,110 @@
+/* Stile schermata principale con dashboard. */
+
+.griglia-schede {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
+    gap: 16px;
+    margin-top: 18px;
+    margin-bottom: 10px;
+}
+
+.scheda {
+    display: flex;
+    flex-direction: column;
+    font-family: inherit;
+    font-size: 1rem;
+    text-align: left;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    padding: 14px;
+    color: #222222;
+}
+
+.scheda-nuovo {
+    align-items: center;
+    justify-content: center;
+    min-height: 230px;
+    background-color: transparent;
+    border: 2px dashed #b8c4d4;
+    color: #1565c0;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+}
+
+.scheda-nuovo:hover {
+    background-color: #eef4fc;
+    border-color: #1565c0;
+}
+
+.segno-piu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.875rem;
+    height: 2.875rem;
+    border-radius: 50%;
+    border: 2px solid currentColor;
+    font-size: 1.75rem;
+    font-weight: normal;
+    line-height: 1;
+    margin-bottom: 10px;
+}
+
+.titolo-scheda {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+    word-break: break-word;
+}
+
+.anteprima {
+    display: block;
+    flex: none;
+    width: 100%;
+    height: 132px;
+    object-fit: contain;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+
+.azioni-scheda {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: auto;
+}
+
+.azioni-scheda .bottone {
+    flex: 1;
+    padding: 7px 6px;
+    font-size: 0.8125rem;
+    white-space: nowrap;
+}
+
+.azioni-scheda .bottone-icona {
+    flex: 0 0 auto;
+    width: 2.1rem;
+    padding: 7px 0;
+    font-size: 1rem;
+    line-height: 1.15;
+    text-align: center; 
+}
+
+.riga-collegamento {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.875rem;
+}
+
+.riga-collegamento a {
+    color: #1565c0;
+    text-decoration: none;
+}
+
+.riga-collegamento a:hover {
+    text-decoration: underline;
+}
